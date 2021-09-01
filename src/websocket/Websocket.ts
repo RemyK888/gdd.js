@@ -79,6 +79,9 @@ export class Websocket {
     this.socket.on(WEBSOCKET_EVENTS.ERROR, async (err) => {
       throw new Error(errorStyle('Websocket: ' + this.extractErrorStatusCode(err.message)));
     });
+    this.socket.on(WEBSOCKET_EVENTS.CLOSE, (code, reason) => {
+      throw new Error(errorStyle('Websocket: ' + code + ', ' + reason));
+    })
   }
 
   /**
